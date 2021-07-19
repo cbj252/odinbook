@@ -1,0 +1,65 @@
+.container {
+  background-color: rgb(32, 33, 34);
+	padding: 16px;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.topMargin {
+	margin-top: 1em;
+}
+
+.leftMargin {
+	margin-left: 1em;
+}
+
+.bigIcon {
+	height: 150px;
+	width: 150px;
+	object-fit: cover;
+}
+
+.smallIcon {
+	height: 40px;
+	width: 40px;
+	object-fit: cover;
+}
+
+.verySmallIcon {
+	height: 20px;
+	width: 20px;
+	object-fit: cover;
+}
+
+.flexRow {
+	display: flex;
+	flex-direction: row;
+}
+
+.flexColumn {
+	display: flex;
+	flex-direction: column;
+}
+
+.flexMainCenter {
+  justify-content: center;
+}
+
+.flexCrossCenter {
+	align-items: center;
+}
+
+.centerText {
+	vertical-align: middle;
+}
+
+.inlineBlock {
+	display: inline-block;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+form {
+  width: 100%;
+}

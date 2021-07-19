@@ -1,0 +1,19 @@
+extends mainLayout
+block content
+  div(class="mainGrid topMargin")
+    +grid1
+    .grid2
+      .container
+        li.flexColumn.flexCrossCenter
+          img.bigIcon(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}`)
+          p.topMargin  #{userFound.display_name}
+      .container
+        each postObj in posts
+          div(class="container topMargin")
+            ul
+              +post(postObj)
+              each commentObj in postObj.comments
+                +comment(commentObj)
+              +postCommentBox(postObj)
+  footer
+    script(src="/commentBox.js")

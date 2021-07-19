@@ -1,0 +1,18 @@
+extends authLayout
+
+block content 
+  body
+    .flexColumn(style="align-items: flex-end")
+      p Already have an account?
+      a(href="/") Login here.
+    .centerSquare
+      .flexColumn
+        h1(style="align-self:center") Sign Up
+        form.flexColumn(action="/signUp", method="POST")
+          label.topMargin(for="username") Username 
+          input.topMargin(name="username", placeholder="username", type="text")
+          label.topMargin(for="password") Password 
+          input.topMargin(name="password", type="text")
+          label.topMargin(for="display_name") Display Name 
+          input.topMargin(name="display_name", type="text")
+          button.topMargin Sign Up

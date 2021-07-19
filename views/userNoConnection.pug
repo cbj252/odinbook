@@ -1,0 +1,13 @@
+extends mainLayout
+block content
+  div(class="mainGrid topMargin")
+    +grid1
+    .grid2
+      .container
+        li.flexColumn.flexCrossCenter
+          img.bigIcon(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}`)
+          p.topMargin  #{userFound.display_name}
+          form(action=`/main/user/${userFound._id}` method="POST")
+            button Send Friend Request
+      .container
+        p Become #{userFound.display_name}'s friend to see their posts.

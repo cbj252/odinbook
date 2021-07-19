@@ -1,0 +1,39 @@
+extends mainLayout
+
+block content
+  div(class="mainGrid topMargin")
+    +grid1
+    div(class="grid2")
+      div(class="container")
+        ul
+          li(class="flexRow")
+            img(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}` class="smallIcon")
+            form(action="/main/post/" method="POST")
+              input(id="input" class="whiteText" name="content" placeholder=`What's on your mind, ${locals.currentUser.display_name}?`)
+      each postObj in posts
+        div(class="container topMargin")
+          ul
+            +post(postObj)
+            each commentObj in postObj.comments
+              +comment(commentObj)
+            +postCommentBox(postObj)
+    div(class="grid3")
+      div(class="container")
+        p Friends
+        ul(class="topMargin")
+          each user in friendList
+            li
+              +userSymbol(user)
+        p.topMargin Friend Requests
+        ul(class="topMargin")
+          each friendObj in friendReqs
+            li
+              +friendReqs(friendObj)
+        p.topMargin Other Users
+        ul(class="topMargin")
+          each user in otherUsers
+            li
+              +userSymbol(user)
+
+  footer
+    script(src="/commentBox.js")

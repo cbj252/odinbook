@@ -1,0 +1,100 @@
+mixin friendReqs(requester)
+  li(class="flexRow flexCrossCenter")
+    img(class="smallIcon" alt="Profile Picture" src=`${requester.profile_pic_url}`) 
+    p #{requester.display_name}
+    div(class="flexBuffer")
+    form(action=`/main/user/${requester._id}/accept`, method="POST" class="smallIcon")
+      label
+        input(type="submit" hidden)
+        svg(class="smallIcon greenSvg" focusable="false" viewBox="0 0 24 24" aria-hidden="true")
+          path(d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z")
+    form(action=`/main/user/${requester._id}/reject`, method="POST" class="smallIcon")
+      label
+        input(type="submit" hidden)
+        svg(class="smallIcon redSvg" focusable="false" viewBox="0 0 24 24" aria-hidden="true")
+          path(d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z")
+
+mixin userSymbol(user)
+  li(class="flexRow flexCrossCenter")
+    img(class="smallIcon" alt="Profile Picture" src=`${user.profile_pic_url}`) 
+    a(href="/main/user/" + user._id) #{user.display_name}
+  
+mixin comment(givenComment)
+  li(class="flexRow topMargin")
+    img(alt="Profile Picture" src=`${givenComment.user.profile_pic_url}` class="smallIcon")
+    div(class="leftMargin")
+      p(class="bold") #{givenComment.user.display_name}
+      p #{givenComment.content}
+      form(action=`/main/comment/${givenComment._id}/like` method="POST" class="flexRow")
+        label
+          input(type="submit" hidden)
+          if givenComment.userLiked
+            svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24" style="fill: blue")
+              path(d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z")
+          else
+            svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24")
+              path(d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z")
+        p &nbsp; #{givenComment.likes.length}
+
+mixin post(givenPost)
+  li(class="flexRow")
+    img(alt="Profile Picture" src=`${givenPost.user.profile_pic_url}` class="smallIcon")
+    div(class="leftMargin")
+      p(class="bold") #{givenPost.user.display_name}
+      p #{givenPost.timeString}
+  li(class="topMargin")
+    p #{givenPost.content}
+  if givenPost.image_url
+    li(class="topMargin")
+      img(src=`${givenPost.image_url}`) 
+  li(class="topMargin")
+    p #{givenPost.likes.length} likes
+  li(class="flexRow topMargin")
+    form(action=`/main/post/${givenPost._id}/like`, method="POST")
+      button(class="flexRow flexMainCenter")
+        if givenPost.userLiked
+          svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24" style="fill: blue")
+            path(d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z")
+          p Like
+        else
+          svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24")
+            path(d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z")
+          p Like
+    button(class="leftMargin flexRow flexMainCenter commentButton" id=`${givenPost._id} CommentButton`)
+      svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24")
+        path(d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z")
+      p Comment
+
+
+mixin postCommentBox(givenPost)
+  li(class="flexRow topMargin" id=`${givenPost._id} Comment` style="display:none")
+    img(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}` class="smallIcon")
+    form(action=`/main/post/${givenPost._id}/comment` method="POST")
+      input(id="input" class="whiteText" name="content" placeholder=`What's on your mind, ${locals.currentUser.display_name}?`)
+
+mixin grid1
+  div(class="grid1")
+    div(class="container")
+      ul
+        li(class="flexRow flexCrossCenter")
+          img(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}` class="smallIcon") 
+          a(href=`/main/user/${locals.currentUser._id}`) #{locals.currentUser.display_name}
+        li(class="flexRow flexCrossCenter")
+          svg(focusable="false" viewBox="0 0 24 24" aria-hidden="true" class="smallIcon")
+            path(transform="scale(1.2, 1.2)" d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z")
+          a(href="/main/settings") Settings
+
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/reset.css', type="text/css")
+    link(rel='stylesheet', href='/stylesheets/utility.css', type="text/css")
+    link(rel='stylesheet', href='/stylesheets/header.css', type="text/css")
+    link(rel='stylesheet', href='/stylesheets/position.css', type="text/css")
+    link(rel='stylesheet', href='/stylesheets/messaging.css', type="text/css")
+    link(rel='stylesheet', href='/stylesheets/friendRequest.css', type="text/css")
+  body
+    header
+      a(href="/main").leftMargin Odinbook
+    block content

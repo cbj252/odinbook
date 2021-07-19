@@ -1,0 +1,15 @@
+extends mainLayout
+block content
+  div(class="mainGrid topMargin")
+    +grid1
+    .grid2
+      .container
+        li.flexColumn.flexCrossCenter
+          img.bigIcon(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}`)
+          p.topMargin  #{userFound.display_name}
+          form(action=`/main/user/${userFound._id}/accept` method="POST")
+            button Accept Friend Request
+          form(action=`/main/user/${userFound._id}/reject` method="POST")
+            button Reject Friend Request
+      .container
+        p Become #{userFound.display_name} to see their posts.

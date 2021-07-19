@@ -1,0 +1,11 @@
+.greenSvg {
+	fill: green;
+}
+
+.redSvg {
+	fill: red;
+}
+
+.flexBuffer {
+	flex-grow: 1;
+}

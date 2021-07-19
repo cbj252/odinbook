@@ -1,0 +1,10 @@
+extends authLayout
+
+block content
+  .centerSquare
+    .flexColumn.topMargin
+      p Oops! There was an error processing your request.
+      h1= message
+      h2= error.status
+      a(href="/main") Return to Main Page?
+

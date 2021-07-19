@@ -1,0 +1,13 @@
+extends mainLayout
+block content
+  div(class="mainGrid topMargin")
+    +grid1
+    .grid2
+      .container
+        li.flexColumn.flexCrossCenter
+          img.bigIcon(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}`)
+          p.topMargin  #{locals.currentUser.display_name}
+        form.topMargin(action=`/main/user/${locals.currentUser._id}/profilePic` method="POST")
+          label.topMargin(for="profilePicUrl") Please put your desired profile picture's url here.
+          input.topMargin(id="input" type="url" class="whiteText" name="profilePicUrl")
+        a(href="/logOut") Logout
