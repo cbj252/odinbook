@@ -14,3 +14,7 @@ block content
           label.topMargin(for="password") Password
           input.topMargin(name="password", type="text")
           button.topMargin Log In
+        form.topMargin.flexColumn(action="/login", method="POST")
+          input(name="username", type="text", value="one", style="display: none")
+          input(name="password", type="text", value="one", style="display: none")
+          button.topMargin Use Test Account
