@@ -5,7 +5,7 @@ block content
     .grid2
       .container
         li.flexColumn.flexCrossCenter
-          img.bigIcon(alt="Profile Picture" src=`${locals.currentUser.profile_pic_url}`)
+          img.bigIcon(alt="Profile Picture" src=`${userFound.profile_pic_url}`)
           p.topMargin  #{userFound.display_name}
           form(action=`/main/user/${userFound._id}` method="POST")
             button Send Friend Request

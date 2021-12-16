@@ -3,13 +3,11 @@ const bcrypt = require("bcrypt");
 const async = require("async");
 var path = require('path');
 
-const { body, validationResult } = require("express-validator");
-
 const User = require("../models/user");
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 
-const { validPost, validComment, timeString } = require("./helperFunc");
+const { timeString, userLiked } = require("./helperFunc");
 
 exports.user_get = function (req, res, next) {
   User.findById(req.params.id)
@@ -35,10 +33,10 @@ exports.user_get = function (req, res, next) {
       .exec(function(err, postsByUser) {
         postsByUser.forEach((post) => {
           post.timeString = timeString(post.date);
-          post.userLiked = userLiked(post, res.locals.currentUser._id);
+          post.userLiked = userLiked(post.likes, res.locals.currentUser._id);
           post.comments.forEach((comment) => {
             comment.timeString = timeString(comment.date);
-            comment.userLiked = userLiked(comment, res.locals.currentUser._id);
+            comment.userLiked = userLiked(comment.likes, res.locals.currentUser._id);
       })
         });
         res.render("userAlreadyFriend", { userFound: userFound, posts: postsByUser });
