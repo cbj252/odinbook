@@ -50,7 +50,7 @@ mixin post(givenPost)
   li(class="topMargin")
     p #{givenPost.likes.length} likes
   li(class="flexRow topMargin")
-    form(action=`/main/post/${givenPost._id}/like`, method="POST")
+    form(action=`/main/post/${givenPost._id}/like` method="POST")
       button(class="flexRow flexMainCenter")
         if givenPost.userLiked
           svg(class="verySmallIcon" focusable="false" viewBox="0 0 24 24" style="fill: blue")

@@ -8,6 +8,7 @@ block content
           img.bigIcon(alt="Profile Picture" src=`${userFound.profile_pic_url}`)
           p.topMargin  #{userFound.display_name}
           form(action=`/main/user/${userFound._id}` method="POST")
-            button Send Friend Request
+            button
+              p.whiteText Send Friend Request
       .container
         p Become #{userFound.display_name}'s friend to see their posts.

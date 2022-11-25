@@ -10,4 +10,5 @@ block content
         form.topMargin(action=`/main/user/${locals.currentUser._id}/profilePic` method="POST")
           label.topMargin(for="profilePicUrl") Please put your desired profile picture's url here.
           input.topMargin(id="input" type="url" class="whiteText" name="profilePicUrl")
+        div.topMargin
         a(href="/logOut") Logout
