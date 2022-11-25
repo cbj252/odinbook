@@ -34,15 +34,18 @@ exports.signUp_post = function (req, res, next) {
   });
 };
 
-// Note this is NOT a function! This is apparently because passport is middleware?
 exports.login_post = passport.authenticate("local", {
   successRedirect: "/main",
   failureRedirect: "/",
 });
 
-exports.logout = function (req, res) {
-  req.logout();
-  res.redirect("/");
+exports.logout = function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 };
 
 exports.homePage = function (req, res) {

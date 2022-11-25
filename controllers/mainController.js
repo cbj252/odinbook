@@ -16,7 +16,6 @@ const {
 exports.index = function (req, res, next) {
   async.parallel(
     {
-      // There's many, many ways to do this. Review later if this is best.
       friendPosts: function (callback) {
         Post.find({
           $or: [
