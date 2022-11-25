@@ -87,7 +87,7 @@ exports.makePost_post = function (req, res, next) {
     date: new Date(),
     content: req.body.content,
   });
-  newPost.save(function (err, result) {
+  newPost.save(function (err) {
     if (err) {
       return next(err);
     }
@@ -106,7 +106,6 @@ exports.likePost_post = function (req, res, next) {
       return next(err);
     }
     const likesArrayIndex = result.likes.indexOf(res.locals.currentUser._id);
-    let likedPost;
     if (likesArrayIndex != -1) {
       result.likes.splice(likesArrayIndex, 1);
     }
@@ -116,7 +115,7 @@ exports.likePost_post = function (req, res, next) {
     Post.findByIdAndUpdate(
       req.params.id,
       { likes: result.likes },
-      function callback(err, theCategory) {
+      function callback(err) {
         if (err) {
           return next(err);
         }
@@ -143,7 +142,7 @@ exports.commentPost_post = function (req, res, next) {
       Post.findByIdAndUpdate(
         req.params.id,
         { comments: initialComments },
-        function (err, result) {
+        function (err) {
           if (err) {
             return next(err);
           }
@@ -174,7 +173,7 @@ exports.likeComment_post = function (req, res, next) {
     Comment.findByIdAndUpdate(
       req.params.id,
       { likes: result.likes },
-      function callback(err, theCategory) {
+      function callback(err) {
         if (err) {
           return next(err);
         }
