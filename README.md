@@ -21,6 +21,7 @@ For logged in users:
 
 - Finding posts and other users are done in parallel to save time. [Example code](https://github.com/cbj252/odinbook/blob/main/controllers/mainController.js#L17)
 - Posting comments: Check if the comment is valid (comment is not empty). If it is, get the post the comment is made for from, and make the comment only if the post is found. [Example code](https://github.com/cbj252/odinbook/blob/main/controllers/mainController.js#L128)
+- Responsive: Uses @media to stack the posts and users on top of one-another on smaller, typically mobile, devices for easier viewing. [Example code](https://github.com/cbj252/odinbook/blob/main/public/stylesheets/position.css)
 - Useful functions that are used in multiple areas like validating posts and comments are kept in a separate file to be
   imported when necessary [Example code](https://github.com/cbj252/odinbook/blob/main/controllers/helperFunc.js)
 
