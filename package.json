@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
-    "test": "tape test.js"
+    "devstart": "nodemon ./bin/www"
   },
   "dependencies": {
     "async": "^3.2.0",
